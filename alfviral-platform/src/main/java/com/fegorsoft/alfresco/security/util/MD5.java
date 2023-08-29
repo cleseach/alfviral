@@ -16,15 +16,20 @@
  */
 package com.fegorsoft.alfresco.security.util;
 
+import com.fegorsoft.alfresco.security.antivirus.VirusTotalScan;
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class md5 {
+public class MD5 {
+
+	private static final Logger logger = Logger.getLogger(MD5.class);
+
 	/**
 	 * Calculates the md5sum
 	 * 
@@ -37,7 +42,7 @@ public class md5 {
 		try {
 			digest = MessageDigest.getInstance("MD5");
 		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 			
 		byte[] buffer = new byte[8192];
@@ -62,7 +67,7 @@ public class md5 {
 			try {
 				is.close();
 			} catch(IOException e) {
-				e.printStackTrace();
+				logger.error(e);
 			}
 		}
 			
@@ -72,7 +77,7 @@ public class md5 {
 	/**
 	 * Calculates the md5sum
 	 * 
-	 * @param String
+	 * @param str
 	 * @return md5sum
 	 */
 	public static String getMD5Sum(String str) {
@@ -93,7 +98,7 @@ public class md5 {
 			}
 			
 		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		
 		return sbResult.toString();

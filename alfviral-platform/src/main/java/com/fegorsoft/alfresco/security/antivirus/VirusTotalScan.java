@@ -95,7 +95,7 @@ public final class VirusTotalScan implements VirusScanMode {
 		} 
 		
 		catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return res;
 	}

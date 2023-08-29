@@ -65,16 +65,14 @@ public final class ICAPScan implements VirusScanMode {
 		try {
 			socket.connect(new InetSocketAddress(host, port));
 		} catch (IOException ioe) {
-			logger.error(getClass().getName() + "Error connecting to " + host.toString() + ":" + port);
-			ioe.printStackTrace();
+			logger.error(getClass().getName() + "Error connecting to " + host.toString() + ":" + port, ioe);
 			result = false;
 		} finally {
 			if (socket.isConnected()) {
 				try {
 					socket.close();
 				} catch (IOException e) {
-					logger.error(getClass().getName() + "Error closing to " + host.toString() + ":" + port);
-					e.printStackTrace();
+					logger.error(getClass().getName() + "Error closing to " + host.toString() + ":" + port, e);
 					result = false;
 				}
 			}
@@ -97,8 +95,7 @@ public final class ICAPScan implements VirusScanMode {
 		try {
 			res = scan();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return res;
 	}
@@ -133,8 +130,7 @@ public final class ICAPScan implements VirusScanMode {
 				logger.debug(getClass().getName() + "Result of scan is:  " + res);
 			}
         } catch (ICAPException ex) {
-            System.err.println("Could not scan document: " + ex.getMessage());
-            ex.printStackTrace();
+            logger.error("Could not scan document: " + ex.getMessage(), ex);
 		} finally {
 			if (inputStream != null)
 				inputStream.close();

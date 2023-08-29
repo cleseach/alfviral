@@ -61,7 +61,7 @@ public final class CommandScan implements VirusScanMode {
 		} 
 		
 		catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		
 		return res;

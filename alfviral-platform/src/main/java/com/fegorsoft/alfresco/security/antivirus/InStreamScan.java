@@ -67,16 +67,14 @@ public final class InStreamScan implements VirusScanMode {
 		try {
 			socket.connect(new InetSocketAddress(host, port));
 		} catch (IOException ioe) {
-			logger.error(getClass().getName() + "Error connecting to " + host.toString() + ":" + port);
-			ioe.printStackTrace();
+			logger.error(getClass().getName() + "Error connecting to " + host.toString() + ":" + port, ioe);
 			result = false;
 		} finally {
 			if (socket.isConnected()) {
 				try {
 					socket.close();
 				} catch (IOException e) {
-					logger.error(getClass().getName() + "Error closing to " + host.toString() + ":" + port);
-					e.printStackTrace();
+					logger.error(getClass().getName() + "Error closing to " + host.toString() + ":" + port, e);
 					result = false;
 				}
 			}
@@ -99,7 +97,7 @@ public final class InStreamScan implements VirusScanMode {
 		try {
 			res = scan();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 		return res;
 	}
